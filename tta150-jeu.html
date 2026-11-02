@@ -26,16 +26,16 @@
   /* ---------- Bannière kaki (comme le site) ---------- */
   .hero {
     position: relative; overflow: hidden; text-align: left;
-    display: flex; flex-wrap: wrap; align-items: center; gap: 1px 10px;
+    display: flex; flex-wrap: nowrap; align-items: center; gap: 8px;
     background: linear-gradient(135deg, #2c381a, #3f4f24 55%, #5c6e33);
-    border-radius: 12px; padding: 9px 12px 7px; margin-bottom: 10px;
+    border-radius: 10px; padding: 7px 10px; margin-bottom: 8px;
     box-shadow: 0 8px 24px rgba(44,56,26,.35);
   }
   .hero::after {
     content: ""; position: absolute; inset: 0; pointer-events: none;
     background: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, transparent 2px 16px);
   }
-  .crest { width: 42px; height: 42px; margin: 0; flex-shrink: 0; display: block;
+  .crest { width: 30px; height: 30px; margin: 0; flex-shrink: 0; display: block;
     filter: drop-shadow(0 4px 10px rgba(0,0,0,.35)); }
   .heroTxt { flex: 1; min-width: 0; position: relative; z-index: 1; }
   .crest .ring { transform-origin: 37px 37px; animation: ringspin 40s linear infinite; }
@@ -46,16 +46,11 @@
     50% { filter: drop-shadow(0 0 10px rgba(244,208,63,.95)); }
   }
   h1 {
-    margin: 0; font-size: 1.12rem; font-weight: 800;
-    letter-spacing: 2.5px; text-transform: uppercase; color: #ffffff;
+    margin: 0; font-size: 1rem; font-weight: 800; white-space: nowrap;
+    letter-spacing: 1.8px; text-transform: uppercase; color: #ffffff;
     text-shadow: 0 1px 0 rgba(0,0,0,.35), 0 3px 12px rgba(0,0,0,.28);
   }
-  .ribbon {
-    display: inline-flex; align-items: center; gap: 8px; margin-top: 1px;
-    font-size: .58rem; letter-spacing: 1.8px; text-transform: uppercase; color: var(--sable);
-    position: relative; padding: 2px 14px;
-  }
-  .ribbon::before, .ribbon::after { content: "✦"; color: #f4d03f; font-size: .5rem; }
+  .ribbon { display: none; }
   .ribbon-line { position: relative; }
   .ribbon-line::before, .ribbon-line::after {
     content: ""; position: absolute; top: 50%; width: 46px; height: 1px;
@@ -63,12 +58,12 @@
   }
   .ribbon-line::before { right: 100%; margin-right: 12px; }
   .ribbon-line::after { left: 100%; margin-left: 12px; transform: scaleX(-1); }
-  .devise { width: 100%; text-align: center; margin-top: 2px; min-height: 1.1em; font-style: italic; font-size: .66rem; color: rgba(217,201,163,.9); letter-spacing: .5px; transition: opacity .4s ease; }
+  .devise { display: none; }
   .soundBtn {
-    position: absolute; top: 8px; right: 8px; z-index: 2;
-    width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+    position: absolute; top: 50%; right: 8px; z-index: 2;
+    width: 26px; height: 26px; border-radius: 50%; cursor: pointer;
     border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.12);
-    color: #fff; font-size: .85rem; line-height: 1; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: .72rem; line-height: 1; display: flex; align-items: center; justify-content: center;
     transition: background .2s, transform .15s;
     touch-action: manipulation;
   }
