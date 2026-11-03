@@ -1,0 +1,16 @@
+{
+  "name": "TTA 150 — Réviser les 21 titres",
+  "short_name": "TTA 150",
+  "description": "Révision des 21 titres TTA : quiz, lecture, jeu et Memento FGI 2026 illustré.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#e8e4d8",
+  "theme_color": "#3f4f24",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

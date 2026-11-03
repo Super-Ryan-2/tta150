@@ -598,6 +598,30 @@
   ];
   UPGRADES.forEach(function (u) { S.owned[u.id] = 0; });
 
+  /* ---------- Sauvegarde locale ---------- */
+  var SAVE_KEY = "tta150-jeu-2026";
+  var save = function () {
+    try { localStorage.setItem(SAVE_KEY, JSON.stringify(S)); } catch (e) {}
+  };
+  try {
+    var saved = JSON.parse(localStorage.getItem(SAVE_KEY) || "null");
+    if (saved && typeof saved === "object") {
+      ["shells", "total", "pearls", "retirements", "clicks"].forEach(function (k) {
+        if (typeof saved[k] === "number" && isFinite(saved[k]) && saved[k] >= 0) S[k] = saved[k];
+      });
+      if (typeof saved.sound === "boolean") S.sound = saved.sound;
+      if (saved.owned && typeof saved.owned === "object") {
+        UPGRADES.forEach(function (u) {
+          var v = saved.owned[u.id];
+          if (typeof v === "number" && v >= 0) S.owned[u.id] = Math.floor(v);
+        });
+      }
+    }
+  } catch (e) {}
+  setInterval(save, 5000);
+  window.addEventListener("pagehide", save);
+  document.addEventListener("visibilitychange", function () { if (document.hidden) save(); });
+
   var mult = function () { return 1 + S.pearls * 0.10; };
   var clickPower = function () { return (1 + S.owned.gun) * mult(); };
   var sps = function () {
@@ -765,6 +789,7 @@
     promoBanner("🎖️ TTA 150 réussi — " + g + " médaille(s) !");
     playRank();
     renderShop();
+    save();
   });
 
   /* ---------- Devise de l'instructeur ---------- */
