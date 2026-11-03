@@ -59,14 +59,35 @@
   .ribbon-line::before { right: 100%; margin-right: 12px; }
   .ribbon-line::after { left: 100%; margin-left: 12px; transform: scaleX(-1); }
   .devise { display: none; }
+  .hero { display: none; } /* bandeau kaki retiré : le site affiche déjà son propre en-tête */
   .soundBtn {
-    position: absolute; top: 50%; right: 8px; z-index: 2;
-    width: 26px; height: 26px; border-radius: 50%; cursor: pointer;
-    border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.12);
+    position: fixed; top: 10px; right: 12px; z-index: 50;
+    width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+    border: 1px solid rgba(255,255,255,.35); background: rgba(63,79,36,.5);
     color: #fff; font-size: .72rem; line-height: 1; display: flex; align-items: center; justify-content: center;
     transition: background .2s, transform .15s;
     touch-action: manipulation;
   }
+  /* ---------- Mode sombre (piloté par le site parent via postMessage) ---------- */
+  body.dark {
+    --encre: #eae7de; --pierre: #a6a294; --bord: #3d3d31; --bord-clair: #38382f;
+    color: var(--encre);
+    background-color: #161613;
+    background-image: radial-gradient(1100px 420px at 50% -120px, #26261f, #161613 48%, #10100c);
+  }
+  body.dark .card { background: #26261f; border-color: #3d3d31; box-shadow: 0 1px 2px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.3); }
+  body.dark .card.prestigeCard { background: linear-gradient(180deg, #33290f, #26261f 60%); border-color: #a16207; }
+  body.dark .stat { background: #1d1d18; }
+  body.dark .stat span, body.dark .hint, body.dark #rankNext, body.dark .btn .owned { color: #a6a294; }
+  body.dark #rankName, body.dark .sectTitle { color: #a3b86b; }
+  body.dark #chevrons { color: #8fa94c; }
+  body.dark .rankBar { background: #38382f; }
+  body.dark .btn { background: #2a2a23; box-shadow: 0 1px 2px rgba(0,0,0,.3); }
+  body.dark .btn .ico { background: #1d1d18; }
+  body.dark .btn.prestige { background: #33290f; border-color: #a16207; }
+  body.dark .btn.prestige .ico { background: #33290f; border-color: #a16207; }
+  body.dark .btn.prestige .name, body.dark .btn.prestige .cost { color: #fcd34d; }
+  body.dark .cloud { background: rgba(255,255,255,.07); }
   .soundBtn:hover { background: rgba(255,255,255,.22); }
   .soundBtn:active { transform: scale(.92); }
 
@@ -360,8 +381,8 @@
 </div>
 
 <div class="wrap">
+  <button class="soundBtn" id="soundBtn" aria-label="Activer / couper le son">🔊</button>
   <div class="hero">
-    <button class="soundBtn" id="soundBtn" aria-label="Activer / couper le son">🔊</button>
     <svg class="crest" viewBox="0 0 74 74" aria-hidden="true">
       <circle cx="37" cy="37" r="34" fill="#f0ede4" stroke="#3f4f24" stroke-width="2.5"/>
       <circle cx="37" cy="37" r="28" fill="none" stroke="rgba(63,79,36,.45)" stroke-width="1" stroke-dasharray="3 3" class="ring"/>
@@ -900,6 +921,14 @@
     S.shells += gain; S.total += gain;
     renderShop();
   }, 200);
+
+  /* ---------- Mode sombre (piloté par le site via postMessage) ---------- */
+  var applyDark = function (on) { document.body.classList.toggle("dark", !!on); };
+  window.addEventListener("message", function (e) {
+    var d = e && e.data;
+    if (d && typeof d === "object" && typeof d.dark === "boolean") applyDark(d.dark);
+  });
+  if (window.parent === window && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) applyDark(true);
 
   drawSoundBtn();
   renderShop();
