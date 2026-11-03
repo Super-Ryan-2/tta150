@@ -1,7 +1,7 @@
 {
-  "name": "TTA 150 — Réviser les 21 titres",
-  "short_name": "TTA 150",
-  "description": "Révision des 21 titres TTA : quiz, lecture, jeu et Memento FGI 2026 illustré.",
+  "name": "Guide du Militaire",
+  "short_name": "Guide du Militaire",
+  "description": "Guide du Militaire : révision des 21 titres TTA 150, quiz, jeu et Memento FGI 2026 illustré.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
